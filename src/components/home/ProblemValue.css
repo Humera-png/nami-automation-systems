@@ -1,0 +1,185 @@
+.problem-value {
+  background: var(--color-surface-cool);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.problem-value__header {
+  max-width: none;
+  margin-bottom: var(--space-6);
+}
+
+.problem-value__header h2 {
+  font-size: var(--fs-h2);
+  margin-top: var(--space-3);
+  max-width: 1280px;
+}
+
+/* Manual Handoffs + Repetitive Decisions side by side (both naturally
+   compact), Follow-up Operations full-width beneath — instead of
+   stacking the two small cards beside the large one, which left the
+   large card's shorter column with a tall empty gutter of page
+   background next to a much taller stacked pair. Each card carries its
+   own background/border rather than sharing one bordered container, so
+   a height mismatch is never more than "one card is shorter." */
+.problem-value__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.problem-value__row-top {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: start;
+  gap: var(--space-5);
+}
+
+.problem-value__zone {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border-soft);
+  min-height: 210px;
+}
+
+.problem-value__zone--large {
+  min-height: 0;
+  max-height: 600px;
+}
+
+.problem-value__visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding: var(--space-2) 0;
+}
+
+.problem-value__visual--large {
+  flex: none;
+  align-items: center;
+  min-height: 130px;
+  margin-bottom: 28px;
+  /* Bleed past the zone's own padding so the chain can run close to,
+     and use the full width of, the card. */
+  margin-inline: calc(-1 * var(--space-6));
+  padding: var(--space-2) var(--space-6) 0;
+}
+
+/* Follow-up Operations is now the full-width row — laid out horizontally
+   (queue on the left, title/description on the right) so the width is
+   actually used instead of stacking narrow-column content in a wide card. */
+.problem-value__zone--wide {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--space-8);
+  min-height: 0;
+  padding-block: var(--space-7);
+}
+
+.problem-value__eyebrow {
+  font-size: var(--fs-micro);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-3);
+}
+
+.problem-value__note {
+  margin-top: var(--space-4);
+  font-size: var(--fs-small);
+  color: var(--color-ink-faint);
+  max-width: 42ch;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.problem-value__zone--wide .problem-value__visual--queue {
+  flex: none;
+  width: min(420px, 42%);
+  align-items: stretch;
+  justify-content: flex-start;
+  padding: 0;
+}
+
+.problem-value__zone--wide .problem-value__copy {
+  flex: 1;
+}
+
+.problem-value__copy {
+  flex-shrink: 0;
+}
+
+.problem-value__zone--large h3 {
+  font-size: var(--fs-h2);
+}
+
+.problem-value__zone--small h3 {
+  font-size: var(--fs-h3);
+}
+
+.problem-value__zone--wide h3 {
+  font-size: var(--fs-h2);
+}
+
+.problem-value__zone h3 {
+  margin-bottom: var(--space-3);
+  letter-spacing: var(--ls-tight);
+}
+
+.problem-value__zone p {
+  font-size: var(--fs-small);
+  color: var(--color-ink-soft);
+  max-width: 34ch;
+}
+
+.problem-value__zone--large p {
+  font-size: var(--fs-body);
+  max-width: 40ch;
+}
+
+.problem-value__zone--wide p {
+  max-width: 44ch;
+}
+
+.problem-value__link {
+  display: inline-flex;
+  margin-top: var(--space-7);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+@media (max-width: 780px) {
+  .problem-value__row-top {
+    grid-template-columns: 1fr;
+  }
+
+  .problem-value__zone--large {
+    max-height: none;
+  }
+
+  .problem-value__zone {
+    min-height: 190px;
+  }
+
+  .problem-value__visual--large {
+    min-height: 110px;
+    margin-bottom: var(--space-5);
+  }
+
+  .problem-value__zone--wide {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+
+  .problem-value__zone--wide .problem-value__visual--queue {
+    width: 100%;
+  }
+}

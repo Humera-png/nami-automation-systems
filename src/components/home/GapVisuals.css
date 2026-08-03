@@ -1,0 +1,270 @@
+/* Manual Handoffs — the same record manually carried through five
+   disconnected systems. One travelling marker moves along a dashed rail;
+   each node's own state (waiting / copying / copied) tells the story
+   without needing a floating customer card to explain it. */
+.handoff-chain {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 210px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.handoff-chain__grid {
+  position: absolute;
+  inset: -20% -6%;
+  background-image: linear-gradient(var(--color-border-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-soft) 1px, transparent 1px);
+  background-size: 10% 20%;
+  opacity: 0.28;
+  mask-image: radial-gradient(65% 65% at 50% 50%, black 25%, transparent 75%);
+  pointer-events: none;
+}
+
+.handoff-chain__row {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-inline: 4px;
+}
+
+.handoff-chain__rail {
+  position: absolute;
+  left: 4px;
+  right: 4px;
+  top: 6px;
+  height: 0;
+  border-top: 2px dashed var(--color-border);
+  opacity: 0.6;
+}
+
+.handoff-chain__record {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  pointer-events: none;
+}
+
+.handoff-chain__record-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  box-shadow: 0 0 0 4px rgba(98, 92, 255, 0.16), 0 0 10px 2px rgba(98, 92, 255, 0.35);
+}
+
+.handoff-chain__record-label {
+  white-space: nowrap;
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--color-signal);
+  background: var(--color-bg-raised);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+}
+
+.handoff-node {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 64px;
+}
+
+.handoff-node__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-bg-raised);
+  border: 2px solid var(--color-border);
+  transition: background-color var(--duration-medium) var(--ease-system), border-color var(--duration-medium) var(--ease-system);
+}
+
+.handoff-node.is-active .handoff-node__dot {
+  border-color: var(--color-signal);
+  background: var(--color-signal);
+  box-shadow: 0 0 0 4px rgba(98, 92, 255, 0.14);
+}
+
+.handoff-node.is-synced .handoff-node__dot {
+  border-color: var(--color-cyan);
+  background: var(--color-cyan);
+}
+
+.handoff-node__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.handoff-node__status {
+  font-size: 0.56rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-ink-faint);
+}
+
+.handoff-node.is-active .handoff-node__status {
+  color: var(--color-signal);
+}
+
+.handoff-node.is-synced .handoff-node__status {
+  color: var(--color-cyan);
+}
+
+@media (max-width: 620px) {
+  .handoff-node {
+    width: 48px;
+  }
+
+  .handoff-node__label {
+    font-size: 0.6rem;
+  }
+
+  .handoff-chain__record-label {
+    display: none;
+  }
+}
+
+/* Repetitive Decisions — a small looping cycle. */
+.gap-loop {
+  width: 100%;
+  height: 100%;
+}
+
+.gap-loop__eyebrow {
+  font-size: 3.4px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  fill: var(--color-ink-faint);
+  opacity: 0.75;
+}
+
+.gap-loop__ring,
+.gap-loop__arrow {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 0.9;
+  stroke-linecap: round;
+}
+
+.gap-loop__node circle {
+  fill: var(--color-bg-raised);
+  stroke: var(--color-border);
+  stroke-width: 1;
+  transition: fill var(--duration-medium) var(--ease-system), stroke var(--duration-medium) var(--ease-system);
+}
+
+.gap-loop__node.is-current circle {
+  fill: var(--color-blue-soft);
+  stroke: var(--color-blue-soft);
+}
+
+.gap-loop__label {
+  font-size: 4.6px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  text-anchor: middle;
+  fill: var(--color-ink-faint);
+}
+
+.gap-loop__node.is-current .gap-loop__label {
+  fill: var(--color-ink);
+}
+
+.gap-loop__cycle {
+  font-size: 3.6px;
+  font-family: var(--font-mono);
+  fill: var(--color-ink-faint);
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+/* Follow-Up Operations — a small waiting queue. */
+.gap-queue {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.gap-queue__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.gap-queue__row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--color-border-soft);
+  font-size: var(--fs-micro);
+}
+
+.gap-queue__row:last-child {
+  border-bottom: none;
+}
+
+.gap-queue__time {
+  font-family: var(--font-mono);
+  color: var(--color-ink-faint);
+  flex-shrink: 0;
+}
+
+.gap-queue__task {
+  color: var(--color-ink-soft);
+}
+
+/* Progressive emphasis — the queue reads as accumulating pressure, not
+   four identical rows. */
+.gap-queue__row--warm .gap-queue__task {
+  color: var(--color-ink);
+}
+
+.gap-queue__row--strong .gap-queue__time,
+.gap-queue__row--strong .gap-queue__task {
+  color: var(--color-danger);
+  font-weight: 600;
+}
+
+.gap-queue__tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: rgba(214, 69, 69, 0.08);
+  border: 1px solid rgba(214, 69, 69, 0.16);
+}
+
+.gap-queue__tag-label {
+  font-size: var(--fs-micro);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-soft);
+}
+
+.gap-queue__tag-value {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--color-danger);
+}

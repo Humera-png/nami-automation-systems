@@ -1,0 +1,172 @@
+.footer {
+  position: relative;
+  background: radial-gradient(26% 45% at 22% 15%, rgba(111, 92, 255, 0.07), transparent 55%),
+    radial-gradient(28% 45% at 78% 85%, rgba(82, 210, 190, 0.05), transparent 55%), var(--color-bg-inverse);
+  color: var(--color-ink-on-inverse-soft);
+  overflow: hidden;
+}
+
+.footer__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+  padding-top: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__cta-heading {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-ink-on-inverse);
+  margin-bottom: var(--space-1);
+}
+
+.footer__cta-copy {
+  color: var(--color-ink-on-inverse-soft);
+}
+
+/* Same fix as PageCTA/FinalCTA: .btn-primary's default background is the
+   same colour as this dark section, so it needs an explicit light shell. */
+.footer__cta .btn-primary {
+  background: #f5f4ef;
+  color: var(--color-bg-inverse);
+  box-shadow: none;
+  white-space: nowrap;
+}
+
+.footer__cta .btn-primary:hover {
+  background: #ffffff;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(3, 1fr);
+  gap: var(--space-6);
+  padding-top: 56px;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__col {
+  padding-left: var(--space-6);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer__col--brand {
+  padding-left: 0;
+  border-left: none;
+}
+
+.footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__col-label {
+  font-size: var(--fs-micro);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-cyan);
+  opacity: 0.85;
+  margin-bottom: var(--space-4);
+}
+
+.footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  color: var(--color-ink-on-inverse);
+  text-decoration: none;
+  margin-bottom: var(--space-5);
+}
+
+.footer__logo-mark {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  /* Sampled from the official NAMI logo's violet-to-teal glyph. */
+  background: linear-gradient(135deg, #7a48f6, #1cc0cd);
+}
+
+.footer__tagline-lead {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-ink-on-inverse);
+  opacity: 0.9;
+  margin-bottom: var(--space-2);
+}
+
+.footer__description {
+  font-size: var(--fs-small);
+  color: var(--color-ink-on-inverse-soft);
+  opacity: 0.75;
+  max-width: 30ch;
+  line-height: 1.5;
+}
+
+.footer__col a {
+  text-decoration: none;
+  font-size: var(--fs-small);
+  color: var(--color-ink-on-inverse-soft);
+  transition: color var(--duration-fast) var(--ease-system);
+}
+
+.footer__col a:hover {
+  color: var(--color-ink-on-inverse);
+}
+
+.footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: 24px 0;
+  font-size: var(--fs-micro);
+}
+
+.footer__tagline {
+  color: var(--color-ink-on-inverse-soft);
+  opacity: 0.7;
+}
+
+@media (max-width: 900px) {
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer__col--brand {
+    grid-column: 1 / -1;
+    margin-bottom: var(--space-3);
+  }
+}
+
+@media (max-width: 560px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .footer__col--brand {
+    grid-column: auto;
+  }
+
+  .footer__cta {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer__cta .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+}

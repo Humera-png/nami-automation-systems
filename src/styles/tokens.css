@@ -1,0 +1,148 @@
+:root {
+  /* Surfaces — a MODULATED material palette, not one beige everywhere.
+     Different scenes opt into different surface tones so the visitor
+     feels movement between them. --color-bg/-raised/-sunken stay as the
+     default reasonable trio; the --color-surface-* set exists for
+     sections that want a deliberately different environmental tone. */
+  --color-surface-warm: #f2f0ea;
+  --color-surface-stone: #e7e5de;
+  --color-surface-mineral: #d8d5cc;
+  --color-surface-cool: #e8ecea;
+  --color-surface-glass: #dde2e0;
+
+  --color-bg: var(--color-surface-warm);
+  --color-bg-raised: #f8f7f3;
+  --color-bg-sunken: var(--color-surface-stone);
+  --color-bg-inverse: #171b1a;
+  --color-bg-inverse-raised: #2b312f;
+  --color-bg-inverse-sunken: #202624;
+
+  /* Ink */
+  --color-ink: #1d211f;
+  --color-ink-soft: #4e5652;
+  --color-ink-faint: #737b76;
+  --color-ink-on-inverse: #f2f1ec;
+  --color-ink-on-inverse-soft: #c7ccc8;
+
+  /* Brand — the NAMI blue/violet family is a RARE activation signal
+     (5-10% of the composition), reserved for primary CTAs, live/active
+     system states, and data-path highlights. Mint/cyan is a SECOND,
+     even rarer, system-state distinction (not a second brand colour). */
+  --color-navy: #171b1a;
+  --color-blue: #625cff;
+  --color-blue-soft: #7974ff;
+  --color-violet: #8a86ff;
+  --color-cyan: #58d8c5;
+  --color-accent: var(--color-blue);
+
+  /* Borders — muted mineral structure */
+  --color-border: #c7c4bb;
+  --color-border-soft: #d8d5cc;
+  --color-border-inverse: rgba(242, 241, 236, 0.14);
+
+  /* Gradients — reserved for automation signals only */
+  --gradient-signal: linear-gradient(90deg, #625cff 0%, #8a86ff 55%, #58d8c5 100%);
+  --gradient-signal-soft: linear-gradient(135deg, rgba(98, 92, 255, 0.12), rgba(88, 216, 197, 0.12));
+  --gradient-hero-bg: radial-gradient(60% 60% at 15% 10%, rgba(98, 92, 255, 0.07), transparent 60%),
+    radial-gradient(50% 50% at 90% 20%, rgba(88, 216, 197, 0.06), transparent 60%);
+
+  /* Automation signal — the single moving-pulse language reused across the site */
+  --color-signal: #625cff;
+  --shadow-signal: 0 0 8px 1px rgba(98, 92, 255, 0.4);
+  --color-signal-inverse: #7974ff;
+  --shadow-signal-inverse: 0 0 8px 1px rgba(121, 116, 255, 0.5);
+
+  /* Status */
+  --color-success: #1f9d76;
+  --color-danger: #d64545;
+
+  /* Typography — an explicit system-font stack, not a web font. No
+     'Inter'/'JetBrains Mono' names here: without a bundled font file or
+     a <link> to load them, the browser silently falls back past them
+     anyway, which just makes the declared stack misleading. This stack
+     is what actually renders today (Segoe UI on Windows, San Francisco
+     on macOS via -apple-system, etc.) — zero extra network requests,
+     zero layout shift from a swapping web font. */
+  --font-sans: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  --fs-display: clamp(2.75rem, 5.2vw + 1rem, 5.75rem);
+  --fs-h1: clamp(2.1rem, 3vw + 1rem, 3.2rem);
+  --fs-h2: clamp(1.9rem, 2vw + 1rem, 2.75rem);
+  --fs-h3: clamp(1.15rem, 0.6vw + 1rem, 1.5rem);
+  --fs-body-lg: 1.15rem;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+  --ls-tight: -0.02em;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6.5rem;
+  --space-10: 9rem;
+
+  /* Responsive rhythm tokens — pick deliberately, don't default to the
+     largest one. Scene = a major homepage moment (hero-scale). Section =
+     a normal page section. Compact = a short connective moment. */
+  --space-scene: clamp(40px, 3.2vw, 58px);
+  --space-section: clamp(72px, 6.5vw, 104px);
+  --space-compact: clamp(48px, 4vw, 80px);
+
+  /* Radius — vary deliberately, not everything is 32px */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-pill: 999px;
+
+  /* Shadow */
+  --shadow-sm: 0 1px 2px rgba(23, 27, 26, 0.08);
+  --shadow-md: 0 8px 24px rgba(23, 27, 26, 0.12);
+  --shadow-lg: 0 24px 64px rgba(23, 27, 26, 0.18);
+
+  /* Motion */
+  --ease-system: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-emphasis: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-medium: 420ms;
+  --duration-slow: 900ms;
+  --duration-cinematic: 1400ms;
+
+  /* Layout */
+  --container-max: 1200px;
+  --nav-height: 76px;
+
+  /* Sticky navbar geometry — the single source of truth every route/page
+     top-offset and scroll-margin derives from. Keep --navbar-height and
+     --navbar-top-offset in sync with Navbar.css's actual
+     .navbar__outer padding-top + .navbar__inner height if either
+     changes. */
+  --navbar-height: 74px;
+  --navbar-top-offset: 16px;
+
+  /* Applied to .page-shell itself (every inner page's wrapper — see
+     PageTransition.jsx) so a route's first heading always clears the
+     floating navbar, regardless of what tag that first element happens
+     to be. 32px of real breathing room below the navbar's visual edge. */
+  --page-header-offset: calc(var(--navbar-height) + var(--navbar-top-offset) + 32px);
+
+  /* Slightly tighter than --page-header-offset — used as scroll-margin-top
+     on every section/anchor further down a page, so a hash link or
+     manual scroll-to never lands with a heading tucked under the navbar,
+     without the extra room a route's very first heading gets. */
+  --navbar-scroll-offset: calc(var(--navbar-height) + var(--navbar-top-offset) + 24px);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --nav-height: 64px;
+    --navbar-height: 64px;
+    --navbar-top-offset: 10px;
+  }
+}

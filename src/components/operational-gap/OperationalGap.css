@@ -1,0 +1,81 @@
+.operational-gap__chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.operational-gap__item {
+  display: flex;
+  align-items: center;
+}
+
+.operational-gap__node {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.85rem 1.3rem;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+  background: var(--color-bg-raised);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+/* Deliberately unaligned — the visual argument of this section is disorder */
+.operational-gap__item:nth-child(2) .operational-gap__node {
+  transform: translateY(18px);
+}
+
+.operational-gap__item:nth-child(4) .operational-gap__node {
+  transform: translateY(-14px);
+}
+
+.operational-gap__item:nth-child(6) .operational-gap__node {
+  transform: translateY(12px);
+}
+
+.operational-gap__item:nth-child(8) .operational-gap__node {
+  transform: translateY(-16px);
+}
+
+.operational-gap__connector {
+  width: 56px;
+  height: 44px;
+  flex-shrink: 0;
+  margin-inline: var(--space-1);
+  overflow: visible;
+}
+
+.operational-gap__connector path {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+@media (max-width: 860px) {
+  .operational-gap__chain {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .operational-gap__item {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .operational-gap__item .operational-gap__node {
+    transform: none !important;
+    width: 100%;
+    text-align: center;
+  }
+
+  .operational-gap__connector {
+    width: 32px;
+    height: 40px;
+    align-self: center;
+    transform: rotate(90deg);
+  }
+}

@@ -1,0 +1,124 @@
+.wf-node {
+  --node-accent: var(--color-signal);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-raised);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-ink-faint);
+  white-space: nowrap;
+  transition: color var(--duration-medium) var(--ease-system), border-color var(--duration-medium) var(--ease-system),
+    box-shadow var(--duration-medium) var(--ease-system), background-color var(--duration-medium) var(--ease-system);
+}
+
+.wf-node--compact {
+  padding: 0.45rem 0.75rem;
+  font-size: var(--fs-micro);
+  gap: var(--space-1);
+}
+
+.wf-node--decision {
+  border-style: dashed;
+  border-radius: var(--radius-md);
+}
+
+.wf-node--trigger {
+  --node-accent: var(--color-cyan);
+}
+
+.wf-node--ai {
+  --node-accent: var(--color-violet);
+}
+
+.wf-node--decision {
+  --node-accent: var(--color-blue);
+}
+
+.wf-node--system {
+  --node-accent: var(--color-blue-soft);
+}
+
+.wf-node--action,
+.wf-node--process {
+  --node-accent: var(--color-signal);
+}
+
+.wf-node--storage {
+  --node-accent: var(--color-violet);
+}
+
+.wf-node--human {
+  --node-accent: var(--color-cyan);
+}
+
+.wf-node--human {
+  border-style: dashed;
+}
+
+.wf-node__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-border);
+  flex-shrink: 0;
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.wf-node--compact .wf-node__dot {
+  width: 5px;
+  height: 5px;
+}
+
+.wf-node.is-active,
+.wf-node.is-processing,
+.wf-node.is-complete {
+  color: var(--color-ink);
+}
+
+.wf-node.is-active .wf-node__dot,
+.wf-node.is-processing .wf-node__dot,
+.wf-node.is-complete .wf-node__dot {
+  background: var(--node-accent);
+}
+
+.wf-node.is-active,
+.wf-node.is-processing {
+  border-color: transparent;
+  box-shadow: 0 0 0 1.5px var(--node-accent), var(--shadow-sm);
+}
+
+.wf-node.is-processing .wf-node__dot {
+  animation: wf-node-pulse 1s var(--ease-system) infinite;
+}
+
+.wf-node.is-complete {
+  border-color: var(--color-border-soft);
+}
+
+.wf-node--inverse {
+  background: rgba(236, 234, 228, 0.05);
+  border-color: var(--color-border-inverse);
+  color: var(--color-ink-on-inverse-soft);
+}
+
+.wf-node--inverse.is-active,
+.wf-node--inverse.is-processing,
+.wf-node--inverse.is-complete {
+  color: var(--color-ink-on-inverse);
+}
+
+@keyframes wf-node-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.7);
+    opacity: 0.55;
+  }
+}

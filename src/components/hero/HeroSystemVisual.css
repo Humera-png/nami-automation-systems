@@ -1,0 +1,174 @@
+.hero-graph {
+  position: relative;
+  width: 100%;
+  max-width: 660px;
+  margin-inline: auto;
+}
+
+.hero-graph__grid {
+  position: absolute;
+  inset: -3% -2%;
+  background-image: linear-gradient(var(--color-border-soft) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-soft) 1px, transparent 1px);
+  background-size: 12.5% 8.3%;
+  opacity: 0.24;
+  /* Tightly bound to where the graph nodes actually sit — the previous
+     -8% bleed plus a wide, high-centred mask let the grid read as loose
+     texture floating above the content, disconnected from it. */
+  mask-image: radial-gradient(60% 60% at 50% 50%, black 25%, transparent 72%);
+  pointer-events: none;
+}
+
+.hero-graph__svg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hero-graph__breathe {
+  transform-origin: 50px 63px;
+  animation: hero-graph-breathe 7s var(--ease-system) infinite;
+}
+
+@keyframes hero-graph-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.012);
+  }
+}
+
+.hero-graph__edge {
+  fill: none;
+  stroke: var(--color-border-soft);
+  stroke-width: 0.35;
+  opacity: 0.7;
+  transition: stroke var(--duration-slow) var(--ease-system), stroke-width var(--duration-slow) var(--ease-system),
+    opacity var(--duration-slow) var(--ease-system);
+}
+
+.hero-graph__edge.is-active {
+  stroke: var(--color-blue-soft);
+  stroke-width: 0.6;
+  opacity: 1;
+  filter: drop-shadow(0 0 1.4px rgba(121, 116, 255, 0.5));
+}
+
+.hero-graph__pulse {
+  fill: var(--color-signal);
+  filter: drop-shadow(0 0 1.6px var(--color-signal));
+}
+
+.hero-graph__node circle,
+.hero-graph__node rect {
+  fill: var(--color-border);
+  stroke: none;
+  transition: fill var(--duration-medium) var(--ease-system), opacity var(--duration-medium) var(--ease-system);
+}
+
+.hero-graph__node--approval .hero-graph__node-outline {
+  fill: var(--color-bg);
+  stroke: var(--color-border);
+  stroke-width: 0.5;
+}
+
+.hero-graph__node--action rect {
+  fill: var(--color-ink-faint);
+}
+
+.hero-graph__node--decision rect {
+  fill: var(--color-border);
+}
+
+.hero-graph__node.is-current.hero-graph__node--input circle {
+  fill: var(--color-cyan);
+}
+
+.hero-graph__node.is-current.hero-graph__node--data rect {
+  fill: var(--color-blue-soft);
+}
+
+.hero-graph__node.is-current.hero-graph__node--ai rect {
+  fill: var(--color-violet);
+}
+
+.hero-graph__node.is-current.hero-graph__node--decision rect {
+  fill: var(--color-blue);
+}
+
+.hero-graph__node.is-current.hero-graph__node--approval .hero-graph__node-outline {
+  stroke: var(--color-cyan);
+  stroke-width: 0.7;
+}
+
+.hero-graph__node.is-current.hero-graph__node--action rect {
+  fill: var(--color-signal);
+}
+
+.hero-graph__label {
+  font-size: 3.4px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+  fill: var(--color-ink-faint);
+  opacity: 0.55;
+}
+
+.hero-graph__panel {
+  position: absolute;
+  top: 6%;
+  right: -4%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.6rem 0.85rem;
+  border-radius: var(--radius-md);
+  background: rgba(248, 247, 243, 0.55);
+  backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 16px 32px -18px rgba(23, 27, 26, 0.24);
+}
+
+.hero-graph__panel-label {
+  font-size: 0.6rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
+.hero-graph__panel-value {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.hero-graph__panel-sub {
+  font-size: 0.62rem;
+  color: var(--color-signal);
+  font-weight: 500;
+}
+
+@media (max-width: 900px) {
+  .hero-graph__panel {
+    right: 2%;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-graph {
+    max-width: 340px;
+  }
+
+  .hero-graph__panel {
+    padding: 0.5rem 0.7rem;
+    top: 2%;
+  }
+
+  .hero-graph__panel-value {
+    font-size: 0.72rem;
+  }
+}

@@ -1,0 +1,97 @@
+.delivery-process {
+  background: var(--color-surface-stone);
+  border-top: 1px solid var(--color-border-soft);
+  padding-top: clamp(72px, 7vw, 104px);
+  padding-bottom: clamp(72px, 7vw, 104px);
+}
+
+.delivery-process__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+.delivery-process__step {
+  padding-top: var(--space-5);
+  border-top: 2px solid var(--color-border-soft);
+  transition: border-color var(--duration-medium) var(--ease-system);
+}
+
+.delivery-process__number {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-blue);
+  margin-bottom: var(--space-3);
+}
+
+.delivery-process__step h3 {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-3);
+}
+
+.delivery-process__step p {
+  font-size: var(--fs-small);
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+}
+
+.delivery-process__step p + p {
+  margin-top: var(--space-1);
+}
+
+.delivery-process__label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-faint) !important;
+  margin-top: var(--space-4) !important;
+  margin-bottom: 0.2rem !important;
+}
+
+.delivery-process__step p.delivery-process__label + p {
+  margin-top: 0 !important;
+}
+
+.delivery-process__result {
+  max-width: 68ch;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-6);
+  padding-top: var(--space-7);
+  border-top: 1px solid var(--color-border-soft);
+  font-size: var(--fs-body-lg);
+  color: var(--color-ink);
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.delivery-process__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-8);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-blue);
+  text-decoration: none;
+}
+
+.delivery-process__link:hover {
+  color: var(--color-violet);
+}
+
+@media (max-width: 1000px) {
+  .delivery-process__list {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-7);
+  }
+}
+
+@media (max-width: 560px) {
+  .delivery-process__list {
+    grid-template-columns: 1fr;
+  }
+}

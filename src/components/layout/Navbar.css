@@ -1,0 +1,354 @@
+/* Fixed at the body level (not scoped to any one page's background) so
+   the navbar's backdrop-filter always has the same subtle texture to
+   blur, on every route, regardless of what that page's own background
+   looks like. This is what makes the glass read identically everywhere
+   instead of only where a page happens to have its own atmosphere. */
+.navbar__atmosphere {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140px;
+  z-index: 99;
+  pointer-events: none;
+  background: radial-gradient(45% 100% at 15% 0%, rgba(98, 92, 255, 0.07), transparent 60%),
+    radial-gradient(40% 100% at 85% 0%, rgba(88, 216, 197, 0.06), transparent 60%);
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: transparent;
+  pointer-events: none;
+}
+
+.navbar__outer {
+  padding-top: 16px;
+  pointer-events: none;
+}
+
+.navbar--scrolled .navbar__outer {
+  padding-top: 10px;
+}
+
+/* A compact glass control bar, not a giant floating card — modest blur
+   radius and a tight contact shadow instead of a big diffuse one, so the
+   capsule reads as thin and suspended rather than tall and puffy. Real
+   translucency (not just opacity) so page content visibly blurs through,
+   plus a faint specular highlight (::before) for a genuine glass read. */
+.navbar__surface {
+  position: relative;
+  max-width: 880px;
+  margin-inline: auto;
+  border-radius: 24px;
+  background: rgba(248, 247, 242, 0.58);
+  backdrop-filter: blur(24px) saturate(165%);
+  -webkit-backdrop-filter: blur(24px) saturate(165%);
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  box-shadow: 0 22px 48px rgba(24, 28, 25, 0.12), 0 4px 14px rgba(24, 28, 25, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  pointer-events: auto;
+  transition: background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease,
+    max-width var(--duration-medium) var(--ease-system);
+}
+
+/* A vertical (not diagonal) highlight — a diagonal gradient on a bar
+   this wide and short reads as one side being brighter than the other,
+   which is exactly the "left side looks different" defect. Top-to-bottom
+   keeps the sheen even across the full width. */
+.navbar__surface::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.04) 55%, rgba(255, 255, 255, 0.08));
+}
+
+.navbar--scrolled .navbar__surface {
+  max-width: 1000px;
+  background: rgba(248, 247, 242, 0.72);
+  box-shadow: 0 24px 54px rgba(24, 28, 25, 0.14), 0 4px 16px rgba(24, 28, 25, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+/* Dark-glass state — flips in while a dark section (Audit preview, Final
+   CTA, Footer) sits directly beneath the floating navbar, so it reads as
+   part of the same material instead of a pale card stranded on dark page
+   background. */
+.navbar--on-dark .navbar__surface {
+  background: rgba(27, 31, 29, 0.58);
+  backdrop-filter: blur(22px) saturate(145%);
+  -webkit-backdrop-filter: blur(22px) saturate(145%);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.navbar--on-dark .navbar__surface::before {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02) 55%, rgba(255, 255, 255, 0.03));
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  gap: var(--space-4);
+  padding-inline: var(--space-4);
+}
+
+.navbar__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--color-ink);
+  flex-shrink: 0;
+  transition: color 300ms ease;
+}
+
+.navbar--on-dark .navbar__logo {
+  color: #f5f4ef;
+}
+
+.navbar__mark {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.navbar__mark-hub {
+  fill: url(#navbar-brand-gradient);
+  transition: fill 300ms ease;
+}
+
+.navbar--on-dark .navbar__mark-hub {
+  fill: #f5f4ef;
+}
+
+.navbar__mark-path {
+  stroke: var(--color-border);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  fill: none;
+  transition: stroke 300ms ease;
+}
+
+.navbar--on-dark .navbar__mark-path {
+  stroke: rgba(255, 255, 255, 0.35);
+}
+
+.navbar__mark-node--violet {
+  fill: #7a48f6;
+}
+
+.navbar__mark-node--teal {
+  fill: #1cc0cd;
+}
+
+.navbar__wordmark {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.navbar__descriptor {
+  display: none;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+  transition: color 300ms ease;
+}
+
+.navbar--on-dark .navbar__descriptor {
+  color: rgba(245, 244, 239, 0.6);
+}
+
+@media (min-width: 1100px) {
+  .navbar__descriptor {
+    display: block;
+  }
+}
+
+.navbar__nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.navbar__links a,
+.navbar__links button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.7rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  font-size: var(--fs-small);
+  font-weight: 500;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 300ms ease;
+}
+
+.navbar--on-dark .navbar__links a,
+.navbar--on-dark .navbar__links button {
+  color: rgba(245, 244, 239, 0.75);
+}
+
+.navbar--on-dark .navbar__links a:hover,
+.navbar--on-dark .navbar__links button:hover,
+.navbar--on-dark .navbar__links a.is-active {
+  color: #f5f4ef;
+}
+
+.navbar__link-label {
+  position: relative;
+  z-index: 1;
+}
+
+.navbar__active-marker {
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.1rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--color-signal);
+}
+
+.navbar__links a:hover,
+.navbar__links button:hover {
+  color: var(--color-ink);
+}
+
+.navbar__links a.is-active {
+  color: var(--color-ink);
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.navbar__cta {
+  white-space: nowrap;
+  transition: background-color 300ms ease, color 300ms ease, box-shadow 300ms ease;
+}
+
+.navbar--on-dark .navbar__cta.btn-primary {
+  background: rgba(245, 244, 239, 0.92);
+  color: #171b1a;
+}
+
+.navbar--on-dark .navbar__cta.btn-primary:hover {
+  background: #ffffff;
+}
+
+.navbar__menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-raised);
+  cursor: pointer;
+}
+
+.navbar__menu-toggle span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  margin-inline: auto;
+  background: var(--color-ink);
+  border-radius: 2px;
+}
+
+.navbar__mobile {
+  display: none;
+  pointer-events: auto;
+}
+
+@media (max-width: 1080px) {
+  .navbar__nav,
+  .navbar__cta {
+    display: none;
+  }
+
+  .navbar__menu-toggle {
+    display: flex;
+  }
+
+  .navbar__mobile {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    background: var(--color-bg-raised);
+    border-top: 1px solid transparent;
+    transition: max-height var(--duration-medium) var(--ease-system);
+  }
+
+  .navbar__mobile.is-open {
+    max-height: 70vh;
+    overflow-y: auto;
+    border-top-color: var(--color-border);
+  }
+
+  .navbar__mobile nav ul {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-5);
+    gap: var(--space-1);
+  }
+
+  .navbar__mobile nav a,
+  .navbar__mobile nav button {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3) var(--space-2);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: var(--fs-body);
+    color: var(--color-ink);
+    background: none;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .navbar__mobile nav a.is-active {
+    color: var(--color-signal);
+  }
+
+  .navbar__mobile nav a:hover,
+  .navbar__mobile nav button:hover {
+    background: var(--color-bg-sunken);
+  }
+
+  .navbar__mobile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: 0 var(--space-5) var(--space-6);
+  }
+}

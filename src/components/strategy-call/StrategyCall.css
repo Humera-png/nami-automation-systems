@@ -1,0 +1,83 @@
+.strategy-call {
+  background: var(--color-bg);
+}
+
+.strategy-call__inner {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.strategy-call__intro h1 {
+  font-size: var(--fs-h1);
+  letter-spacing: var(--ls-tight);
+  max-width: 14ch;
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.strategy-call__subtitle {
+  font-size: var(--fs-body-lg);
+  color: var(--color-ink-soft);
+  line-height: 1.6;
+  max-width: 46ch;
+  margin-bottom: var(--space-6);
+}
+
+.strategy-call__highlights {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-7);
+}
+
+.strategy-call__highlights li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.strategy-call__highlights li span {
+  color: var(--color-cyan);
+  font-weight: 700;
+}
+
+.strategy-call__embed-card {
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-5);
+  overflow: hidden;
+  scroll-margin-top: var(--page-header-offset);
+}
+
+.strategy-call__embed-card .calendly-inline-widget {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+@media (max-width: 960px) {
+  .strategy-call__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .strategy-call__intro h1 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .strategy-call__embed-card {
+    padding: var(--space-3);
+  }
+
+  .strategy-call__embed-card .calendly-inline-widget {
+    min-width: 0 !important;
+    height: 620px !important;
+  }
+}

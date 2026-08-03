@@ -1,0 +1,82 @@
+.audit-analysis {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+  padding-block: var(--space-6);
+}
+
+.audit-analysis h1 {
+  font-size: var(--fs-h2);
+  margin-bottom: var(--space-7);
+}
+
+.audit-analysis__map {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0;
+  margin-bottom: var(--space-8);
+}
+
+.audit-analysis__map-item {
+  display: flex;
+  align-items: center;
+}
+
+.audit-analysis__stages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-align: left;
+}
+
+.audit-analysis__stage {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-soft);
+  color: var(--color-ink-faint);
+  transition: border-color var(--duration-medium) var(--ease-system), color var(--duration-medium) var(--ease-system),
+    background-color var(--duration-medium) var(--ease-system);
+}
+
+.audit-analysis__stage-number {
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  flex-shrink: 0;
+  width: 1.6em;
+}
+
+.audit-analysis__stage-label {
+  flex: 1;
+  font-size: var(--fs-body);
+}
+
+.audit-analysis__stage.is-complete {
+  color: var(--color-ink-soft);
+}
+
+.audit-analysis__stage.is-complete .audit-analysis__stage-number {
+  color: var(--color-signal);
+}
+
+.audit-analysis__stage.is-current {
+  color: var(--color-ink);
+  border-color: var(--color-blue-soft);
+  background: var(--color-bg-raised);
+}
+
+.audit-analysis__stage.is-current .audit-analysis__stage-number {
+  color: var(--color-blue);
+}
+
+@media (max-width: 620px) {
+  .audit-analysis__stage {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
+}

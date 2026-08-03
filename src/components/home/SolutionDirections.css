@@ -1,0 +1,177 @@
+.solution-directions {
+  background: radial-gradient(35% 45% at 80% 8%, rgba(88, 216, 197, 0.06), transparent 60%),
+    radial-gradient(30% 40% at 8% 20%, rgba(98, 92, 255, 0.06), transparent 55%), var(--color-surface-stone);
+  border-top: 1px solid var(--color-border-soft);
+  padding-top: clamp(72px, 7vw, 104px);
+  padding-bottom: clamp(80px, 7.5vw, 110px);
+}
+
+.solution-directions__header {
+  max-width: none;
+  margin-bottom: clamp(48px, 5vw, 64px);
+}
+
+.solution-directions__header h2 {
+  font-size: var(--fs-h2);
+  margin-top: var(--space-3);
+  max-width: 1280px;
+}
+
+.solution-directions__trust {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-5);
+}
+
+.solution-directions__trust li {
+  position: relative;
+  padding-left: var(--space-4);
+  font-size: var(--fs-micro);
+  font-weight: 500;
+  color: var(--color-ink-faint);
+}
+
+.solution-directions__trust li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-blue-soft);
+}
+
+/* Row 1: Operations + AI side by side, equal width.
+   Row 2: Custom Business Systems, centred beneath both — not stretched
+   across the full row. No grid-row spanning, no stretched heights. */
+.solution-directions__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.solution-directions__item--operations {
+  grid-column: 1;
+}
+
+.solution-directions__item--ai-workflows {
+  grid-column: 2;
+}
+
+.solution-directions__item--custom-systems {
+  grid-column: 1 / -1;
+  width: min(640px, 100%);
+  justify-self: center;
+}
+
+.solution-directions__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 36px 36px;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-border-soft);
+  text-decoration: none;
+  color: var(--color-ink);
+  overflow: hidden;
+  transition: background-color 450ms var(--ease-system), border-color 450ms var(--ease-system),
+    box-shadow 450ms ease, transform 450ms ease;
+}
+
+.solution-directions__item:hover {
+  background: #151917;
+  border-color: transparent;
+  box-shadow: 0 28px 56px -20px rgba(15, 18, 16, 0.32);
+  transform: translateY(-3px) scale(1.005);
+}
+
+/* Every card shares one content structure — visual area, then title,
+   then description — sized from its own content so all three read as
+   the same design system instead of one being a stretched canvas. */
+.solution-directions__visual {
+  flex: none;
+  width: 100%;
+  min-height: 230px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.solution-directions__content {
+  margin-top: 32px;
+}
+
+.solution-directions__title {
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-3);
+  letter-spacing: var(--ls-tight);
+  max-width: 26ch;
+  color: var(--color-ink);
+  transition: color 350ms ease;
+}
+
+.solution-directions__description {
+  font-size: var(--fs-small);
+  color: var(--color-ink-soft);
+  max-width: 42ch;
+  margin-top: 14px;
+  line-height: 1.55;
+  transition: color 350ms ease;
+}
+
+/* Explicit dark-state colours — the title has its own global `color`
+   declaration (h1-h4 rule in global.css), so it will NOT inherit the
+   parent link's colour on hover. Every text/line element that needs to
+   flip for the dark state must be targeted directly, not assumed. */
+.solution-directions__item:hover .solution-directions__title {
+  color: #f5f3ed;
+}
+
+.solution-directions__item:hover .solution-directions__description {
+  color: rgba(245, 243, 237, 0.72);
+}
+
+.solution-directions__arrow {
+  position: absolute;
+  top: var(--space-6);
+  right: var(--space-6);
+  font-size: 1.2rem;
+  opacity: 0.5;
+  color: inherit;
+  transition: transform var(--duration-fast) var(--ease-system), opacity var(--duration-fast) var(--ease-system);
+}
+
+.solution-directions__item:hover .solution-directions__arrow {
+  transform: translate(3px, -3px);
+  opacity: 1;
+  color: #f5f3ed;
+}
+
+@media (max-width: 900px) {
+  .solution-directions__item--custom-systems {
+    width: min(560px, 100%);
+  }
+}
+
+@media (max-width: 780px) {
+  .solution-directions__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solution-directions__item--operations,
+  .solution-directions__item--ai-workflows,
+  .solution-directions__item--custom-systems {
+    grid-column: 1;
+    width: 100%;
+  }
+
+  .solution-directions__visual {
+    min-height: 190px;
+  }
+}

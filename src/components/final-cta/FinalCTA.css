@@ -1,0 +1,75 @@
+.final-cta {
+  position: relative;
+  background: radial-gradient(28% 55% at 18% 25%, rgba(111, 92, 255, 0.09), transparent 55%),
+    radial-gradient(30% 50% at 82% 70%, rgba(88, 216, 197, 0.06), transparent 55%), var(--color-bg-inverse);
+  color: var(--color-ink-on-inverse);
+  padding-top: clamp(80px, 6vw, 112px);
+  padding-bottom: clamp(76px, 5.5vw, 100px);
+  overflow: hidden;
+}
+
+.final-cta__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.final-cta__status {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-8);
+}
+
+.final-cta__inner h2 {
+  font-size: var(--fs-h2);
+  color: var(--color-ink-on-inverse);
+}
+
+.final-cta__inner p {
+  margin-top: var(--space-4);
+  font-size: var(--fs-body-lg);
+  color: var(--color-ink-on-inverse-soft);
+}
+
+.final-cta__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+
+/* .btn-primary's default background (--color-navy) is the exact same
+   colour as this section's background, so the button was rendering with
+   no visible shell at all — just floating text. Give it real contrast. */
+.final-cta .btn-primary {
+  background: #f5f4ef;
+  color: var(--color-bg-inverse);
+  box-shadow: none;
+}
+
+.final-cta .btn-primary:hover {
+  background: #ffffff;
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.4);
+}
+
+.final-cta .btn-secondary {
+  background: transparent;
+  border-color: var(--color-border-inverse);
+  color: var(--color-ink-on-inverse);
+}
+
+.final-cta .btn-secondary:hover {
+  background: rgba(245, 244, 239, 0.08);
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}
+
+.final-cta .btn-primary,
+.final-cta .btn-secondary {
+  padding-top: 1.05rem;
+  padding-bottom: 1.05rem;
+  padding-left: 1.9rem;
+}

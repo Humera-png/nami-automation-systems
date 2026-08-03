@@ -1,0 +1,69 @@
+.automation-signal {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  box-shadow: var(--shadow-signal);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.automation-signal--inverse {
+  background: var(--color-signal-inverse);
+  box-shadow: var(--shadow-signal-inverse);
+}
+
+.automation-signal--x {
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+.automation-signal--y {
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+}
+
+.automation-signal--x.is-active {
+  animation: automation-signal-travel-x 1.3s var(--ease-system) infinite;
+}
+
+.automation-signal--y.is-active {
+  animation: automation-signal-travel-y 1.3s var(--ease-system) infinite;
+}
+
+@keyframes automation-signal-travel-x {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes automation-signal-travel-y {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}

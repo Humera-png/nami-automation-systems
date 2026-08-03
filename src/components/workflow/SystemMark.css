@@ -1,0 +1,167 @@
+.system-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.45rem 0.75rem;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-ink-faint);
+  white-space: nowrap;
+  transition: color var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--compact {
+  padding: 0.3rem 0.5rem;
+  font-size: var(--fs-micro);
+  gap: var(--space-1);
+}
+
+.system-mark.is-active,
+.system-mark.is-complete {
+  color: var(--color-ink);
+}
+
+.system-mark__form {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.system-mark__label {
+  letter-spacing: 0.01em;
+}
+
+/* TRIGGER — activation point */
+.system-mark--trigger .system-mark__form {
+  border-radius: 50%;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--trigger.is-active .system-mark__form,
+.system-mark--trigger.is-complete .system-mark__form {
+  background: var(--color-cyan);
+  box-shadow: 0 0 0 3px rgba(88, 216, 197, 0.18);
+}
+
+/* DATA — thin floating slab */
+.system-mark--data .system-mark__form {
+  width: 20px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--data.is-active .system-mark__form,
+.system-mark--data.is-complete .system-mark__form {
+  background: var(--color-blue-soft);
+}
+
+/* AI — layered translucent depth */
+.system-mark--ai .system-mark__form {
+  width: 16px;
+  height: 14px;
+  border-radius: 3px;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark__depth {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: var(--color-violet);
+  opacity: 0;
+  transform: translate(3px, 3px);
+  transition: opacity var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--ai.is-active .system-mark__form,
+.system-mark--ai.is-complete .system-mark__form {
+  background: var(--color-violet);
+}
+
+.system-mark--ai.is-active .system-mark__depth,
+.system-mark--ai.is-complete .system-mark__depth {
+  opacity: 0.3;
+}
+
+/* DECISION — branching gate */
+.system-mark--decision .system-mark__form {
+  width: 11px;
+  height: 11px;
+  margin-inline: 1.5px;
+  background: var(--color-border);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--decision.is-active .system-mark__form,
+.system-mark--decision.is-complete .system-mark__form {
+  background: var(--color-blue);
+}
+
+/* APPROVAL — framed checkpoint, never filled */
+.system-mark--approval .system-mark__form {
+  border: 2px solid var(--color-border);
+  border-radius: 3px;
+  background: transparent;
+  transition: border-color var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--approval.is-active .system-mark__form,
+.system-mark--approval.is-complete .system-mark__form {
+  border-color: var(--color-cyan);
+}
+
+/* ACTION — solid terminal block */
+.system-mark--action .system-mark__form {
+  border-radius: 3px;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--action.is-active .system-mark__form,
+.system-mark--action.is-complete .system-mark__form {
+  background: var(--color-signal);
+}
+
+/* STORAGE — stacked layers */
+.system-mark--storage .system-mark__form {
+  width: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.system-mark__layer {
+  display: block;
+  width: 100%;
+  height: 3px;
+  border-radius: 1px;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--storage.is-active .system-mark__layer,
+.system-mark--storage.is-complete .system-mark__layer {
+  background: var(--color-violet);
+}
+
+/* PROCESS / fallback — neutral architectural surface */
+.system-mark--process .system-mark__form,
+.system-mark--system .system-mark__form {
+  border-radius: 3px;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.system-mark--process.is-active .system-mark__form,
+.system-mark--process.is-complete .system-mark__form,
+.system-mark--system.is-active .system-mark__form,
+.system-mark--system.is-complete .system-mark__form {
+  background: var(--color-blue-soft);
+}

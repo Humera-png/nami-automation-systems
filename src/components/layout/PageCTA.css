@@ -1,0 +1,51 @@
+.page-cta {
+  background: radial-gradient(30% 55% at 20% 20%, rgba(111, 92, 255, 0.08), transparent 55%),
+    radial-gradient(30% 50% at 82% 80%, rgba(82, 210, 190, 0.06), transparent 55%), var(--color-bg-inverse);
+  color: var(--color-ink-on-inverse);
+}
+
+.page-cta__inner {
+  max-width: 640px;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.page-cta__inner h2 {
+  font-size: var(--fs-h2);
+  color: var(--color-ink-on-inverse);
+}
+
+.page-cta__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-top: var(--space-7);
+}
+
+/* .btn-primary's default background (--color-navy) is the same colour
+   as this section's background — without this override the button has
+   no visible shell at all, just floating text (the exact bug found and
+   fixed on FinalCTA earlier). */
+.page-cta .btn-primary {
+  background: #f5f4ef;
+  color: var(--color-bg-inverse);
+  box-shadow: none;
+}
+
+.page-cta .btn-primary:hover {
+  background: #ffffff;
+  box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.4);
+}
+
+.page-cta .btn-secondary {
+  background: transparent;
+  border-color: var(--color-border-inverse);
+  color: var(--color-ink-on-inverse);
+}
+
+.page-cta .btn-secondary:hover {
+  background: rgba(245, 244, 239, 0.08);
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+}

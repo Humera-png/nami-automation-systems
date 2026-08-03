@@ -1,0 +1,83 @@
+.mini-arch {
+  width: 100%;
+  height: 100%;
+}
+
+.mini-arch__edge {
+  fill: none;
+  stroke: var(--color-border);
+  stroke-width: 1;
+  transition: stroke var(--duration-medium) var(--ease-system);
+}
+
+.mini-arch__pulse {
+  fill: var(--color-signal);
+  filter: drop-shadow(0 0 2px var(--color-signal));
+}
+
+.mini-arch__node rect,
+.mini-arch__node circle {
+  fill: var(--color-bg);
+  stroke: var(--color-border-strong, var(--color-border));
+  stroke-width: 1;
+  transition: fill var(--duration-medium) var(--ease-system), stroke var(--duration-medium) var(--ease-system);
+}
+
+.mini-arch__node--input circle {
+  stroke: var(--color-ink-faint);
+}
+
+.mini-arch__node--action rect {
+  fill: var(--color-ink-faint);
+  stroke: var(--color-ink-faint);
+}
+
+.mini-arch__node-outline {
+  fill: transparent !important;
+  stroke-dasharray: 2 1.4;
+}
+
+.mini-arch__node.is-current rect,
+.mini-arch__node.is-current circle {
+  stroke: var(--color-signal);
+}
+
+.mini-arch__node--ai.is-current rect {
+  fill: var(--color-violet);
+  stroke: var(--color-violet);
+}
+
+.mini-arch__node--decision.is-current rect {
+  fill: var(--color-blue-soft);
+  stroke: var(--color-blue-soft);
+}
+
+.mini-arch__node--action.is-current rect {
+  fill: var(--color-signal);
+  stroke: var(--color-signal);
+}
+
+.mini-arch__node--layer rect {
+  fill: var(--color-bg-raised);
+}
+
+.mini-arch__node--layer.is-current rect {
+  stroke: var(--color-cyan);
+}
+
+/* On dark surfaces (large card hover-inverse, dark preview cards) keep the
+   diagram legible instead of near-invisible dark-on-dark. */
+.solution-directions__item:hover .mini-arch__edge {
+  stroke: var(--color-border-inverse);
+}
+
+.solution-directions__item:hover .mini-arch__node rect,
+.solution-directions__item:hover .mini-arch__node circle {
+  fill: transparent;
+  stroke: var(--color-ink-on-inverse-soft);
+}
+
+.solution-directions__item:hover .mini-arch__node--action rect {
+  fill: var(--color-ink-on-inverse-soft);
+  stroke: var(--color-ink-on-inverse-soft);
+}

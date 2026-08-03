@@ -1,0 +1,46 @@
+.nami-intro {
+  background: var(--color-bg-inverse);
+  color: var(--color-ink-on-inverse);
+}
+
+.nami-intro__inner {
+  max-width: 620px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nami-intro__glyph {
+  width: 34px;
+  height: 34px;
+  margin-bottom: var(--space-5);
+}
+
+.nami-intro .eyebrow {
+  color: var(--color-cyan);
+}
+
+.nami-intro h2 {
+  font-size: var(--fs-h2);
+  color: var(--color-ink-on-inverse);
+  line-height: 1.2;
+}
+
+.nami-intro__paragraph {
+  margin-top: var(--space-4);
+  font-size: var(--fs-body-lg);
+  color: var(--color-ink-on-inverse-soft);
+  max-width: 46ch;
+}
+
+.nami-intro .btn-primary {
+  margin-top: var(--space-7);
+  background: var(--color-ink-on-inverse);
+  color: var(--color-navy);
+}
+
+.nami-intro .btn-primary:hover {
+  background: #ffffff;
+}

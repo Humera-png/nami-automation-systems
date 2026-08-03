@@ -1,0 +1,472 @@
+.nami-ai {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 200;
+}
+
+.nami-ai__launcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  height: 48px;
+  padding: 0 13px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border-inverse);
+  background: var(--color-bg-inverse);
+  color: var(--color-ink-on-inverse);
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform var(--duration-fast) var(--ease-system), padding-right var(--duration-medium) var(--ease-emphasis);
+}
+
+.nami-ai__launcher:hover,
+.nami-ai__launcher:focus-visible {
+  transform: translateY(-2px);
+  padding-right: 18px;
+}
+
+.nami-ai__launcher-glyph {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.nami-ai__launcher-status {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-signal-inverse);
+  box-shadow: 0 0 0 2px var(--color-bg-inverse);
+}
+
+.nami-ai__launcher-text {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  opacity: 0;
+  transition: max-width var(--duration-medium) var(--ease-emphasis), opacity var(--duration-fast) var(--ease-system),
+    margin-left var(--duration-medium) var(--ease-emphasis);
+}
+
+.nami-ai__launcher:hover .nami-ai__launcher-text,
+.nami-ai__launcher:focus-visible .nami-ai__launcher-text {
+  max-width: 120px;
+  opacity: 1;
+  margin-left: var(--space-2);
+}
+
+.nami-ai__panel {
+  width: min(420px, 90vw);
+  max-height: min(680px, calc(100vh - 120px));
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, rgba(242, 240, 234, 0.72), rgba(242, 240, 234, 0.4));
+  backdrop-filter: blur(24px) saturate(135%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 80px rgba(23, 27, 26, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+
+.nami-ai__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-inverse);
+  background: rgba(23, 27, 26, 0.92);
+  backdrop-filter: blur(10px);
+  color: var(--color-ink-on-inverse);
+}
+
+.nami-ai__header-identity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.nami-ai__header-title {
+  font-weight: 700;
+  font-size: var(--fs-body);
+}
+
+.nami-ai__header-status {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-on-inverse-soft);
+  margin-top: 0.15rem;
+}
+
+.nami-glyph__line {
+  stroke: var(--color-border-inverse);
+  stroke-width: 1.4;
+  transition: stroke var(--duration-medium) var(--ease-system);
+}
+
+.nami-glyph__node {
+  fill: var(--color-ink-on-inverse-soft);
+  transition: fill var(--duration-medium) var(--ease-system);
+}
+
+.nami-glyph__hub {
+  fill: var(--color-signal-inverse);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.nami-glyph.is-active .nami-glyph__line {
+  stroke: var(--color-signal-inverse);
+  opacity: 0.7;
+}
+
+.nami-glyph.is-active .nami-glyph__node {
+  fill: var(--color-ink-on-inverse);
+}
+
+.nami-glyph.is-active .nami-glyph__hub {
+  animation: nami-glyph-pulse 2.2s var(--ease-system) infinite;
+}
+
+.nami-glyph.is-busy .nami-glyph__hub {
+  animation: nami-glyph-pulse 0.9s var(--ease-system) infinite;
+}
+
+@keyframes nami-glyph-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.65;
+  }
+}
+
+.nami-ai__close {
+  border: none;
+  background: transparent;
+  color: var(--color-ink-on-inverse-soft);
+  cursor: pointer;
+  padding: var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+.nami-ai__close:hover {
+  color: var(--color-ink-on-inverse);
+  background: rgba(236, 234, 228, 0.1);
+}
+
+.nami-ai__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.nami-message {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+  max-width: 88%;
+}
+
+.nami-message--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.nami-message--assistant {
+  align-self: flex-start;
+}
+
+.nami-message__avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gradient-signal);
+  flex-shrink: 0;
+}
+
+.nami-message__bubble {
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.nami-message--assistant .nami-message__bubble {
+  background: rgba(216, 213, 204, 0.55);
+  backdrop-filter: blur(8px);
+  color: var(--color-ink);
+  border-bottom-left-radius: 4px;
+}
+
+.nami-message--user .nami-message__bubble {
+  background: var(--color-bg-inverse-raised);
+  color: var(--color-ink-on-inverse);
+  border-bottom-right-radius: 4px;
+}
+
+.nami-message__bubble--loading {
+  display: flex;
+  align-items: center;
+}
+
+.nami-message-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.nami-message-group--user {
+  align-items: flex-end;
+}
+
+.nami-ai__booking-cta {
+  align-self: flex-start;
+  margin-left: 30px;
+  padding: 0.55rem 1.1rem;
+  font-size: var(--fs-small);
+}
+
+.nami-lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-left: 30px;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.nami-lead-form__intro {
+  font-size: var(--fs-small);
+  color: var(--color-ink-soft);
+  line-height: 1.55;
+}
+
+.nami-lead-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.nami-lead-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.nami-lead-form__field span {
+  text-transform: none;
+  font-weight: 400;
+  color: var(--color-ink-faint);
+  letter-spacing: normal;
+}
+
+.nami-lead-form__field input {
+  padding: 0.6rem 0.8rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.6);
+  font-size: var(--fs-small);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--color-ink);
+}
+
+.nami-lead-form__field input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 0 0 3px rgba(98, 92, 255, 0.15);
+}
+
+.nami-lead-form__consent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--fs-micro);
+  color: var(--color-ink-faint);
+  line-height: 1.5;
+}
+
+.nami-lead-form__consent input {
+  margin-top: 0.2rem;
+  flex-shrink: 0;
+}
+
+.nami-lead-form__message {
+  font-size: var(--fs-micro);
+  color: var(--color-danger);
+}
+
+.nami-lead-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.nami-lead-form__actions .btn {
+  padding: 0.6rem 1.1rem;
+  font-size: var(--fs-small);
+}
+
+.nami-lead-form__success {
+  margin-left: 30px;
+  font-size: var(--fs-small);
+}
+
+@media (max-width: 560px) {
+  .nami-lead-form {
+    margin-left: 0;
+  }
+
+  .nami-lead-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .nami-ai__booking-cta,
+  .nami-lead-form__success {
+    margin-left: 0;
+  }
+}
+
+.nami-suggestions {
+  margin-top: var(--space-2);
+}
+
+.nami-suggestions__label {
+  font-size: var(--fs-micro);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-ink-faint);
+  margin-bottom: var(--space-3);
+}
+
+.nami-suggestions__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.nami-suggestions__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: left;
+  width: 100%;
+  padding: 0.55rem 0.4rem;
+  border: none;
+  border-bottom: 1px solid var(--color-border-soft);
+  background: none;
+  font-size: var(--fs-small);
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: color var(--duration-fast) var(--ease-system), padding-left var(--duration-fast) var(--ease-system);
+}
+
+.nami-suggestions__item:hover {
+  color: var(--color-ink);
+  padding-left: 0.65rem;
+}
+
+.nami-suggestions__item-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-signal);
+  flex-shrink: 0;
+}
+
+.nami-ai__input-row {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(242, 240, 234, 0.4);
+  backdrop-filter: blur(16px);
+}
+
+.nami-ai__input-row input {
+  flex: 1;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  font-size: var(--fs-small);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--color-ink);
+  transition: box-shadow var(--duration-fast) var(--ease-system), background-color var(--duration-fast) var(--ease-system);
+}
+
+.nami-ai__input-row input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 0 0 3px rgba(98, 92, 255, 0.15);
+}
+
+.nami-ai__send {
+  padding: 0.65rem 1.1rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--color-navy);
+  color: var(--color-ink-on-inverse);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nami-ai__send:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 560px) {
+  .nami-ai {
+    right: var(--space-3);
+    bottom: var(--space-3);
+  }
+
+  .nami-ai__launcher {
+    width: 48px;
+    padding: 0 13px;
+  }
+
+  .nami-ai__launcher:hover,
+  .nami-ai__launcher:focus-visible {
+    width: auto;
+  }
+
+  .nami-ai__panel {
+    position: fixed;
+    right: var(--space-3);
+    bottom: var(--space-3);
+    left: var(--space-3);
+    width: auto;
+    max-height: 82vh;
+  }
+}

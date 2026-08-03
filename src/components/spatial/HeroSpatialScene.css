@@ -1,0 +1,9 @@
+.hero-spatial {
+  position: relative;
+  width: 100%;
+  height: clamp(480px, 52vw, 760px);
+}
+
+.hero-spatial canvas {
+  display: block;
+}

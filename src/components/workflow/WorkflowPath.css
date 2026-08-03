@@ -1,0 +1,46 @@
+.wf-path {
+  position: relative;
+  width: clamp(28px, 4vw, 56px);
+  height: 2px;
+  margin-inline: var(--space-2);
+  background: var(--color-border);
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.wf-path--inverse {
+  background: var(--color-border-inverse);
+}
+
+.wf-path--compact {
+  width: clamp(16px, 2.4vw, 28px);
+  margin-inline: var(--space-1);
+}
+
+.wf-path--y {
+  width: 2px;
+  height: clamp(20px, 4vw, 32px);
+  margin-inline: 0;
+  margin-block: var(--space-1);
+  align-self: flex-start;
+  margin-left: 1.1rem;
+}
+
+.wf-path--compact.wf-path--y {
+  height: clamp(14px, 2.4vw, 22px);
+}
+
+.wf-path__line {
+  position: absolute;
+  inset: 0;
+  background: var(--color-border);
+  transition: background var(--duration-medium) var(--ease-system);
+}
+
+.wf-path--inverse .wf-path__line {
+  background: var(--color-border-inverse);
+}
+
+.wf-path.is-active .wf-path__line {
+  background: var(--gradient-signal);
+}
